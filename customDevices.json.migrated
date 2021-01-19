@@ -1,0 +1,84 @@
+{
+  "881-21-2": [
+    {
+      "type": "climate",
+      "object_id": "thermostat",
+      "values": [
+        "64-0-mode",
+        "49-0-Air temperature",
+        "67-0-setpoint-heat",
+        "67-0-setpoint-eco"
+      ],
+      "mode_map": {
+        "off": "0",
+        "heat": "1",
+        "cool": "11",
+        "dry": "15",
+        "fan_only": "31"
+      },
+      "setpoint_topic": {
+        "1": "67-0-setpoint-heat",
+        "11": "67-0-setpoint-eco"
+      },
+      "default_setpoint": "67-0-setpoint-heat",
+      "discovery_payload": {
+        "min_temp": 8,
+        "max_temp": 28,
+        "modes": ["off", "heat", "cool", "dry", "fan_only"],
+        "mode_state_topic": "64-0-mode",
+        "mode_command_topic": true,
+        "current_temperature_topic": "49-0-Air temperature",
+        "temp_step": 0.1,
+        "current_temperature_template": "{{ value_json.value }}",
+        "temperature_state_template": "{{ value_json.value }}",
+        "temperature_command_topic": true
+      }
+    },
+    {
+      "type": "sensor",
+      "object_id": "valve_position",
+      "discovery_payload": {
+        "value_template": "{{ value_json.value }}",
+        "state_topic": "38-1-0"
+      },
+      "values": ["38-1-0"]
+    },
+    {
+      "type": "cover",
+      "object_id": "valve_control",
+      "discovery_payload": {
+        "position_topic": "38-1-0",
+        "command_topic": "38-1-0",
+        "set_position_topic": "38-1-0",
+        "value_template": "{{ (value_json.value / 99 * 100) | round(0) }}",
+        "position_open": 99,
+        "position_closed": 0,
+        "payload_open": "99",
+        "payload_close": "0"
+      },
+      "values": ["38-1-0"]
+    },
+    {
+      "type": "sensor",
+      "object_id": "current_temperature",
+      "discovery_payload": {
+        "value_template": "{{ value_json.value }}",
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "state_topic": "49-1-1"
+      },
+      "values": ["49-1-1"]
+    },
+    {
+      "type": "sensor",
+      "object_id": "target_temperature",
+      "discovery_payload": {
+        "value_template": "{{ value_json.value }}",
+        "device_class": "temperature",
+        "unit_of_measurement": "°C",
+        "state_topic": "67-1-1"
+      },
+      "values": ["67-1-1"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "881-21-2": {
+    "type": "climate",
+    "object_id": "thermostat",
+    "values": ["64-1-0", "49-1-1", "67-1-1", "67-1-11"],
+    "mode_map": {
+      "off": "Off",
+      "heat": "Heat",
+      "cool": "Heat Eco",
+      "dry": "Boost",
+      "fan_only": "Manufacturer Specific"
+    },
+    "setpoint_topic": {
+      "Off": "67-1-1",
+      "Heat": "67-1-1",
+      "Heat Eco": "67-1-1",
+      "Boost": "67-1-1"
+    },
+    "default_setpoint": "67-1-1",
+    "discovery_payload": {
+      "min_temp": 8,
+      "max_temp": 28,
+      "modes": ["off", "heat", "cool", "dry", "fan_only"],
+      "mode_state_topic": "64-1-0",
+      "mode_command_topic": true,
+      "current_temperature_topic": "49-1-1",
+      "temp_step": 0.1,
+      "current_temperature_template": "{{ value_json.value }}",
+      "temperature_state_template": "{{ value_json.value }}",
+      "temperature_command_topic": true
+    }
+  }
+}
